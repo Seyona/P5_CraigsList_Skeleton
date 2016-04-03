@@ -3,11 +3,11 @@ package com.example.listview;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toolbar;
 
 public class Activity_ListView extends AppCompatActivity {
 
