@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Activity_ListView extends AppCompatActivity {
 
@@ -37,6 +38,21 @@ public class Activity_ListView extends AppCompatActivity {
 
 		//TODO call a thread to get the JSON list of bikes
 		//TODO when it returns it should process this data with bindData
+
+		boolean network_reachable = ConnectivityCheck.isNetworkReachable(this);
+
+		if (network_reachable) {
+			boolean has_wifi = ConnectivityCheck.isWifiReachable(this);
+			if (has_wifi) {
+
+			} else {
+				Toast.makeText(this,"Connected to the network, but have no wifi access",Toast.LENGTH_SHORT).show();
+			}
+		} else {
+			Toast.makeText(this,"Network is unreachable",Toast.LENGTH_SHORT).show();
+		}
+
+
 	}
 
 	private void setupListViewOnClickListener() {
