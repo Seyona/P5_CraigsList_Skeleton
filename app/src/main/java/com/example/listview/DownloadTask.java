@@ -1,5 +1,6 @@
 package com.example.listview;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -19,6 +20,8 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
     private static final String TAG = "DownloadTask";
     private static final int BUFFER_SIZE = 8096;
     Activity_ListView myActivity;
+
+    private ProgressDialog dialog;
 
     // 1 second
     private static final int TIMEOUT = 1000;
@@ -117,7 +120,8 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        //TODO Your Stuff Here
+        myActivity.j_son_string = result;
+
     }
 
     /*
