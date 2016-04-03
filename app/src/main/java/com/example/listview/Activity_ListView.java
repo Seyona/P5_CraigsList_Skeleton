@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ public class Activity_ListView extends AppCompatActivity {
 
 	List<BikeData> data;
 	ListView my_listview;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +107,7 @@ public class Activity_ListView extends AppCompatActivity {
 	 */
 	private void bindData(String JSONString) {
 		data = JSONHelper.parseAll(JSONString);
+		my_listview.setAdapter(new ArrayAdapter<>(this,R.layout.listview_row_layout,data));
 	}
 
 	Spinner spinner;
