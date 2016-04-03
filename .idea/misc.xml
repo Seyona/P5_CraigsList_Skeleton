@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleLocalSettings">
+    <option name="modificationStamps">
+      <map>
+        <entry key="$USER_HOME$/AndroidStudioProjects/AndroidProject1" value="4361516020000" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/Project1 copy" value="4365116515000" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/Project1Attempt2" value="4362728402000" />
+        <entry key="$USER_HOME$/AndroidStudioProjects/TMP" value="4362728402000" />
+        <entry key="$PROJECT_DIR$" value="4308504546000" />
+        <entry key="$PROJECT_DIR$/../Project1Attempt2" value="4362728402000" />
+        <entry key="$USER_HOME$/Downloads/toolbar_Spinner_Checkbox_EditText" value="4366919824000" />
+      </map>
+    </option>
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="true" assert-keyword="true" jdk-15="true" />
+</project>
