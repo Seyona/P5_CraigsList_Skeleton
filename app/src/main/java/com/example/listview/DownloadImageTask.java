@@ -40,7 +40,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     protected Bitmap doInBackground(String... params) {
 
         // site we want to connect to
-        String url = params[0];
+        String url = params[0] + this.pictureID;
         Log.d(TAG, "URL is " + url);
 
         // note streams are left willy-nilly here because it declutters the

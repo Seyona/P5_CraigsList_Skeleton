@@ -20,13 +20,37 @@ public class BikeData {
      */
     @Override
     public String toString() {
-        // TODO figure out how to print all bikedata out for dialogs
-
-        return "TODO";
+        return "Company:" + Company + "\n" +
+                "Model:" + Model + "\n" +
+                "Price:" + Price + "\n" +
+                "Location:" + Location + "\n" +
+                "Date Listed:"+ Date + "\n" +
+                "Description:"+ Description + "\n" +
+                "Link:" + Link + "\n";
     }
 
+    public String getPicture() {
+        return this.Picture;
+    }
+
+    private String Company;
+    private String Model;
+    private Double Price;
+    String Description;
+    String Location;
+    String Date;
+    String Picture;
+    String Link;
+
     private BikeData(Builder b) {
-        //TODO
+        this.Company     = b.Company;
+        this.Model       = b.Model;
+        this.Price       = b.Price;
+        this.Description = b.Description;
+        this.Location    = b.Location;
+        this.Date        = b.Date;
+        this.Picture     = b.Picture;
+        this.Link        = b.Link;
     }
 
     /**
@@ -86,19 +110,5 @@ public class BikeData {
             return new BikeData(this);
         }
 
-
-        /*
-            NEED TO FIGURE OUT HOW TO CALL THIS OUT SIDE OF THIS CLASS....
-         */
-        @Override
-        public String toString() {
-            return "Company:" + Company + "\n" +
-                         "Model:" + Model + "\n" +
-                         "Price:" + Price + "\n" +
-                         "Location:" + Location + "\n" +
-                         "Date Listed:"+ Date + "\n" +
-                         "Description:"+ Description + "\n" +
-                         "Link:" + Link + "\n";
-        }
     }
 }

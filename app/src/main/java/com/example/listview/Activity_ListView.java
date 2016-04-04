@@ -116,8 +116,8 @@ public class Activity_ListView extends AppCompatActivity {
 	private void updateView(int index) {
 		View v = my_listview.getChildAt(index - my_listview.getFirstVisiblePosition());
 		String link,picture_id;
-		link = "";
-		picture_id = "";
+		link = prefs.getString("listPref","");
+		picture_id = data.get(index).getPicture();
 
 		if (v == null) {
 			Log.e("listView status", "null for an odd reason");

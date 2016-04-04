@@ -25,7 +25,7 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
 
     // 1 second
     private static final int TIMEOUT = 1000;
-    private String myQuery = "";
+    private String myQuery = "bikes.json";
     String myURL;
     int statusCode = 0;
 
