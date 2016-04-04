@@ -1,5 +1,7 @@
 package com.example.listview;
 
+import java.text.DecimalFormat;
+
 /**
  * See builderpattern example project for how to do builders
  * they are essential when constructing complicated objects and
@@ -19,6 +21,7 @@ public class BikeData {
     @Override
     public String toString() {
         // TODO figure out how to print all bikedata out for dialogs
+
         return "TODO";
     }
 
@@ -53,27 +56,27 @@ public class BikeData {
         // notice it returns this bulder
         // makes it suitable for chaining
         Builder setDescription(String Description) {
-            this.Description = Description;
+            this.Description = (Description == null || Description.equals(""))? "none" : Description;
             return this;
         }
 
         Builder setLocation(String Location) {
-            this.Location = Location;
+            this.Location = (Location == null || Location.equals(""))? "Unknown" : Location;
             return this;
         }
 
         Builder setDate(String Date) {
-            this.Date = Date;
+            this.Date = (Date == null || Date.equals(""))? "No Date" : Date;
             return this;
         }
 
         Builder setPicture(String Picture) {
-            this.Picture = Picture;
+            this.Picture = (Picture == null || Picture.equals(""))? "No picture" : Picture;
             return this;
         }
 
         Builder setLink(String Link) {
-            this.Link = Link;
+            this.Link = (Link == null || Link.equals(""))? "No link" : Link;
             return this;
         }
 
@@ -81,6 +84,21 @@ public class BikeData {
         // without fear of partial construction
         public BikeData build() {
             return new BikeData(this);
+        }
+
+
+        /*
+            NEED TO FIGURE OUT HOW TO CALL THIS OUT SIDE OF THIS CLASS....
+         */
+        @Override
+        public String toString() {
+            return "Company:" + Company + "\n" +
+                         "Model:" + Model + "\n" +
+                         "Price:" + Price + "\n" +
+                         "Location:" + Location + "\n" +
+                         "Date Listed:"+ Date + "\n" +
+                         "Description:"+ Description + "\n" +
+                         "Link:" + Link + "\n";
         }
     }
 }

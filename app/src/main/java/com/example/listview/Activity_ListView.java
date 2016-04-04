@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -108,6 +111,31 @@ public class Activity_ListView extends AppCompatActivity {
 	private void bindData(String JSONString) {
 		data = JSONHelper.parseAll(JSONString);
 		my_listview.setAdapter(new ArrayAdapter<>(this,R.layout.listview_row_layout,data));
+	}
+
+	private void updateView(int index) {
+		View v = my_listview.getChildAt(index - my_listview.getFirstVisiblePosition());
+		String link,picture_id;
+		link = "";
+		picture_id = "";
+
+		if (v == null) {
+			Log.e("listView status", "null for an odd reason");
+			return;
+		}
+
+		ImageView my_image = (ImageView) v.findViewById(R.id.imageView1);
+		DownloadImageTask task = new DownloadImageTask(picture_id,my_image);
+		try {
+			Object temp = task.execute(link).get(); // just to halt program until task done
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
+		}
+
+
+
 	}
 
 	Spinner spinner;
