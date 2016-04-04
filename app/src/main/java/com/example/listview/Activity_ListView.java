@@ -113,26 +113,32 @@ public class Activity_ListView extends AppCompatActivity {
 		my_listview.setAdapter(new ArrayAdapter<>(this,R.layout.listview_row_layout,data));
 	}
 
-	private void updateView(int index) {
-		View v = my_listview.getChildAt(index - my_listview.getFirstVisiblePosition());
+	private void updateView() {
+
+		View v;
 		String link,picture_id;
 		link = prefs.getString("listPref","");
-		picture_id = data.get(index).getPicture();
+		ImageView my_image;
 
-		if (v == null) {
-			Log.e("listView status", "null for an odd reason");
-			return;
+		for (int i = 0; i < i - my_listview.getChildCount(); i++) {
+			v = my_listview.getChildAt(i - my_listview.getFirstVisiblePosition());
+			picture_id = data.get(i).getPicture();
+
+			if (v == null) {
+				Log.e("listView status", "null for an odd reason");
+				return;
+			}
+
+			my_image = (ImageView) v.findViewById(R.id.imageView1);
+			DownloadImageTask task = new DownloadImageTask(picture_id,my_image);
+			try {
+				Object temp = task.execute(link).get(); // just to halt program until task done
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+
 		}
 
-		ImageView my_image = (ImageView) v.findViewById(R.id.imageView1);
-		DownloadImageTask task = new DownloadImageTask(picture_id,my_image);
-		try {
-			Object temp = task.execute(link).get(); // just to halt program until task done
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
 
 
 
