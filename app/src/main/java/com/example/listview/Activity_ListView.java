@@ -103,6 +103,8 @@ public class Activity_ListView extends AppCompatActivity {
 	}
 
 	private void setupListViewOnClickListener() {
+		//BikeData b = (BikeData)my_listview.getAdapter().getItem(0);
+		//b.toString();
 		//TODO you want to call my_listviews setOnItemClickListener with a new instance of android.widget.AdapterView.OnItemClickListener() {
 	}
 
