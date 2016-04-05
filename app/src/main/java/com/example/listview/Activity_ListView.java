@@ -117,32 +117,6 @@ public class Activity_ListView extends AppCompatActivity {
 
 	}
 
-	public void updateView() {
-
-		View v;
-		String link,picture_id;
-		link = prefs.getString("listPref", "");
-		ImageView my_image;
-
-		for (int i = 0; i < i - my_listview.getChildCount(); i++) {
-			v = my_listview.getChildAt(i - my_listview.getFirstVisiblePosition());
-			picture_id = data.get(i).getPicture();
-
-			if (v == null) {
-				Log.e("listView status", "null for an odd reason");
-				return;
-			}
-
-			my_image = (ImageView) v.findViewById(R.id.imageView1);
-			DownloadImageTask task = new DownloadImageTask(picture_id,my_image);
-			task.execute(link);
-
-		}
-
-
-
-
-	}
 
 	Spinner spinner;
 	/**
