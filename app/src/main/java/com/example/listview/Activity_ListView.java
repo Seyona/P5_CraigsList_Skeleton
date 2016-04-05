@@ -1,6 +1,7 @@
 package com.example.listview;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -59,7 +60,7 @@ public class Activity_ListView extends AppCompatActivity {
 			@Override
 			public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 				if (key.equals("listPref")) {
-					Toast.makeText(getBaseContext(), "Preference changed", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getBaseContext(),"Preference changed", Toast.LENGTH_SHORT).show();
 					if (!first_run) {
 						checkNetworkAndDownloadJson();
 					}
@@ -80,15 +81,16 @@ public class Activity_ListView extends AppCompatActivity {
 			boolean has_wifi = ConnectivityCheck.isWifiReachable(this);
 			if (has_wifi) {
 				DownloadTask task = new DownloadTask(this);
-				try {
-					Object temp = task.execute(prefs.getString("listPref","")).get(); //never used temp just making program wait
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					e.printStackTrace();
-				}
+				//try {
+					task.execute(prefs.getString("listPref",""));
+					//Object temp = task.execute(prefs.getString("listPref","")).get(); //never used temp just making program wait
+		//		} catch (InterruptedException e) {
+		//			e.printStackTrace();
+		//		} catch (ExecutionException e) {
+//					e.printStackTrace();
+		//		}
 
-				bindData(this.j_son_string);
+				//bindData(this.j_son_string);
 			} else {
 				Toast.makeText(this,"Connected to the network, but have no wifi access",Toast.LENGTH_SHORT).show();
 			}
@@ -108,16 +110,16 @@ public class Activity_ListView extends AppCompatActivity {
 	 *
 	 * @param JSONString  complete string of all bikes
 	 */
-	private void bindData(String JSONString) {
+	public void bindData(String JSONString) {
 		data = JSONHelper.parseAll(JSONString);
 		my_listview.setAdapter(new ArrayAdapter<>(this,R.layout.listview_row_layout,data));
 	}
 
-	private void updateView() {
+	public void updateView() {
 
 		View v;
 		String link,picture_id;
-		link = prefs.getString("listPref","");
+		link = prefs.getString("listPref", "");
 		ImageView my_image;
 
 		for (int i = 0; i < i - my_listview.getChildCount(); i++) {
@@ -131,11 +133,7 @@ public class Activity_ListView extends AppCompatActivity {
 
 			my_image = (ImageView) v.findViewById(R.id.imageView1);
 			DownloadImageTask task = new DownloadImageTask(picture_id,my_image);
-			try {
-				Object temp = task.execute(link).get(); // just to halt program until task done
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
-			}
+			task.execute(link);
 
 		}
 
@@ -166,6 +164,10 @@ public class Activity_ListView extends AppCompatActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+			case R.id.action_settings:
+				Intent myIntent = new Intent(this, activityPreference.class);
+				startActivity(myIntent);
+				break;
 
 		default:
 			break;

@@ -5,6 +5,6 @@
         android:title="Web Sites"
         android:entries="@array/JSON_URL_NAME"
         android:entryValues="@array/JSON_URL"
-        android:defaultValue="http://www.tetonsoftware.com/bikes/bikes.json"
+        android:defaultValue="@string/tetonURL"
         />
 </PreferenceScreen>
