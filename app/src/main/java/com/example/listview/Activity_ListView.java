@@ -27,6 +27,8 @@ public class Activity_ListView extends AppCompatActivity {
 	private SharedPreferences.OnSharedPreferenceChangeListener listener;
 	public String j_son_string;
 
+
+	private CustomAdapter adapter;
 	List<BikeData> data;
 	ListView my_listview;
 
@@ -113,8 +115,8 @@ public class Activity_ListView extends AppCompatActivity {
 	 */
 	public void bindData(String JSONString) {
 		data = JSONHelper.parseAll(JSONString);
-
-
+		adapter = new CustomAdapter(this, R.layout.listview_row_layout, data);
+		my_listview.setAdapter(adapter);
 	}
 
 
