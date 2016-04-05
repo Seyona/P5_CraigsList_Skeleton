@@ -113,7 +113,8 @@ public class Activity_ListView extends AppCompatActivity {
 	 */
 	public void bindData(String JSONString) {
 		data = JSONHelper.parseAll(JSONString);
-		my_listview.setAdapter(new ArrayAdapter<>(this,R.layout.listview_row_layout,data));
+
+
 	}
 
 	public void updateView() {

@@ -36,10 +36,21 @@ public class BikeData {
     public String getPicture() {
         return this.Picture;
     }
+    public String getCompany() {return this.Company;}
+    public String getLocation(){return Location;}
+    public String getDescription() {return Description;}
+    public String getDate() {return Date;}
+    public String getLink() {return Link;}
+    public String getModel() { return Model; }
+    public Double getPrice() { return Price; }
 
     private String Company;
     private String Model;
+
+
+
     private Double Price;
+
     String Description;
     String Location;
     String Date;
