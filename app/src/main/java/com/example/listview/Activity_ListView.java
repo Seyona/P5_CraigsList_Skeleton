@@ -68,6 +68,7 @@ public class Activity_ListView extends AppCompatActivity {
 				}
 			}
 		};
+		prefs.registerOnSharedPreferenceChangeListener(listener);
 
 		checkNetworkAndDownloadJson();
 
