@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -26,6 +27,8 @@ public class Activity_ListView extends AppCompatActivity {
 	private boolean first_run = true;
 	private SharedPreferences.OnSharedPreferenceChangeListener listener;
 	public String j_son_string;
+	Spinner spinner;
+	private ArrayAdapter adapt;
 
 
 	private CustomAdapter adapter;
@@ -43,6 +46,7 @@ public class Activity_ListView extends AppCompatActivity {
 
 		//listview that you will operate on
 		my_listview = (ListView)findViewById(R.id.lv);
+		spinner = (Spinner) findViewById(R.id.spinner);
 
 		//toolbar
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -73,7 +77,19 @@ public class Activity_ListView extends AppCompatActivity {
 		prefs.registerOnSharedPreferenceChangeListener(listener);
 
 		checkNetworkAndDownloadJson();
+		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+				//if (connected) downloadPicture(position);
+				Log.e("Position", "" + position);
+			}
 
+			@Override
+			public void onNothingSelected(AdapterView<?> parentView) {
+				// your code here
+			}
+
+		});
 
 	}
 
@@ -122,7 +138,7 @@ public class Activity_ListView extends AppCompatActivity {
 	}
 
 
-	Spinner spinner;
+
 	/**
 	 * create a data adapter to fill above spinner with choices(Company,Location and Price),
 	 * bind it to the spinner
@@ -131,6 +147,12 @@ public class Activity_ListView extends AppCompatActivity {
 	 * dontforget to bind the listener to the spinner with setOnItemSelectedListener!
 	 */
 	private void setupSimpleSpinner() {
+		spinner.setPrompt("Bikes");
+		String[] s = {"No_connection"};
+		adapt = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,s);
+		adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner.setAdapter(adapt);
+		adapt.notifyDataSetChanged();
 
 	}
 

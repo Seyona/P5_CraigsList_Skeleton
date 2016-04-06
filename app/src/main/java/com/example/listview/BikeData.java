@@ -8,10 +8,6 @@ import java.text.DecimalFormat;
  * with many optional fields
  */
 public class BikeData {
-    //testing uploading
-
-
-
     public static final int COMPANY = 0;
     public static final int MODEL = 1;
     public static final int PRICE = 2;
