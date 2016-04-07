@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -55,6 +56,22 @@ public class Activity_ListView extends AppCompatActivity {
 
 		setupSimpleSpinner();
 
+		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+				if (data != null) {
+					sortData();
+					bindAdapter();
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parentView) {
+				// your code here
+			}
+
+		});
+
 		//set the listview onclick listener
 		setupListViewOnClickListener();
 
@@ -76,20 +93,10 @@ public class Activity_ListView extends AppCompatActivity {
 		};
 		prefs.registerOnSharedPreferenceChangeListener(listener);
 
+
+		first_run = false;
 		checkNetworkAndDownloadJson();
-		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-			@Override
-			public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-				//if (connected) downloadPicture(position);
-				Log.e("Position", "" + position);
-			}
 
-			@Override
-			public void onNothingSelected(AdapterView<?> parentView) {
-				// your code here
-			}
-
-		});
 
 	}
 
@@ -100,16 +107,9 @@ public class Activity_ListView extends AppCompatActivity {
 			boolean has_wifi = ConnectivityCheck.isWifiReachable(this);
 			if (has_wifi) {
 				DownloadTask task = new DownloadTask(this);
-				//try {
-					task.execute(prefs.getString("listPref",""));
-					//Object temp = task.execute(prefs.getString("listPref","")).get(); //never used temp just making program wait
-		//		} catch (InterruptedException e) {
-		//			e.printStackTrace();
-		//		} catch (ExecutionException e) {
-//					e.printStackTrace();
-		//		}
-
-				//bindData(this.j_son_string);
+				String url = prefs.getString("listPref","");
+				Log.e("URL_String",prefs.getString("listPref",""));
+				task.execute(url);
 			} else {
 				Toast.makeText(this,"Connected to the network, but have no wifi access",Toast.LENGTH_SHORT).show();
 			}
@@ -124,6 +124,36 @@ public class Activity_ListView extends AppCompatActivity {
 		//TODO you want to call my_listviews setOnItemClickListener with a new instance of android.widget.AdapterView.OnItemClickListener() {
 	}
 
+
+	/**
+	 * Sorts the BikeData based on the current selected sort option
+	 */
+	private void sortData() {
+		String choice = spinner.getSelectedItem().toString();
+
+		if (choice.equals("Company")) {
+			Collections.sort(data,new ComparatorComp());
+			return;
+		}
+
+		if (choice.equals("Model")) {
+			Collections.sort(data,new ComparatorModel());
+			return;
+		}
+
+		if (choice.equals("Price")) {
+			Collections.sort(data, new ComparatorPrice());
+			return;
+		}
+	}
+
+
+	private void bindAdapter() {
+		adapter = new CustomAdapter(this,R.layout.listview_row_layout,data);
+		my_listview.setAdapter(adapter);
+		adapter.notifyDataSetChanged();
+	}
+
 	/**
 	 * Takes the string of bikes, parses it using JSONHelper
 	 * Sets the adapter with this list using a custom row layout and an instance of the CustomAdapter
@@ -133,8 +163,8 @@ public class Activity_ListView extends AppCompatActivity {
 	 */
 	public void bindData(String JSONString) {
 		data = JSONHelper.parseAll(JSONString);
-		adapter = new CustomAdapter(this, R.layout.listview_row_layout, data);
-		my_listview.setAdapter(adapter);
+		sortData();
+		bindAdapter();
 	}
 
 
@@ -148,7 +178,7 @@ public class Activity_ListView extends AppCompatActivity {
 	 */
 	private void setupSimpleSpinner() {
 		spinner.setPrompt("Bikes");
-		String[] s = {"No_connection"};
+		String[] s = {"Company", "Model", "Price"};
 		adapt = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,s);
 		adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapt);

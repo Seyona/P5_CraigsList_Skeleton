@@ -120,9 +120,19 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        myActivity.j_son_string = result;
-        myActivity.bindData(myActivity.j_son_string);
-        myActivity.updateView();
+        if (result == null ) {
+          Log.e("Result Status", "null");
+        } else {
+            if (result.isEmpty()) {
+                Log.e("Result Status", "Empty");
+            } else {
+                Log.e("Result Status", result);
+                myActivity.j_son_string = result;
+                myActivity.bindData(myActivity.j_son_string);
+            }
+        }
+
+
 
     }
 
