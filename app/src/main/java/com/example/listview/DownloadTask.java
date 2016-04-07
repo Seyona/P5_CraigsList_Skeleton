@@ -129,6 +129,7 @@ public class DownloadTask extends AsyncTask<String, Void, String> {
                 Log.e("Result Status", result);
                 myActivity.j_son_string = result;
                 myActivity.bindData(myActivity.j_son_string);
+                myActivity.setupListViewOnClickListener();
             }
         }
 

@@ -1,5 +1,8 @@
 package com.example.listview;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -69,8 +72,7 @@ public class Activity_ListView extends AppCompatActivity {
 
 		});
 
-		//set the listview onclick listener
-		setupListViewOnClickListener();
+
 
 		//TODO call a thread to get the JSON list of bikes
 		//TODO when it returns it should process this data with bindData
@@ -93,6 +95,8 @@ public class Activity_ListView extends AppCompatActivity {
 
 		first_run = false;
 		checkNetworkAndDownloadJson();
+		//set the listview onclick listener
+		//setupListViewOnClickListener();
 
 
 	}
@@ -115,10 +119,28 @@ public class Activity_ListView extends AppCompatActivity {
 		}
 	}
 
-	private void setupListViewOnClickListener() {
+	public void setupListViewOnClickListener() {
 		//BikeData b = (BikeData)my_listview.getAdapter().getItem(0);
 		//b.toString();
 		//TODO you want to call my_listviews setOnItemClickListener with a new instance of android.widget.AdapterView.OnItemClickListener() {
+		my_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Object o = my_listview.getItemAtPosition(position);
+				BikeData b = (BikeData) o;
+
+				AlertDialog a = new AlertDialog.Builder(view.getContext()).create();
+				a.setMessage(b.toString());
+				a.setButton("Ok",new DialogInterface.OnClickListener() {
+
+					public void onClick(DialogInterface dialog, int which) {
+						// just needs to close out
+					}
+				});
+				a.show();
+			}
+		});
+
 	}
 
 
@@ -197,6 +219,9 @@ public class Activity_ListView extends AppCompatActivity {
 				Intent myIntent = new Intent(this, activityPreference.class);
 				startActivity(myIntent);
 				break;
+
+			case R.id.action_refresh:
+				checkNetworkAndDownloadJson();
 
 		default:
 			break;

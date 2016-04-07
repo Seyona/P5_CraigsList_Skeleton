@@ -8,4 +8,9 @@
         app:showAsAction="never"
         android:title="Settings"></item>
 
+    <item android:id="@+id/action_refresh"
+        android:icon="@drawable/refresh"
+        app:showAsAction="always"
+        android:title="Refresh"></item>
+
 </menu>
