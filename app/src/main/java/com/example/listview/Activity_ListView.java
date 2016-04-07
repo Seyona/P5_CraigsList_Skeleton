@@ -1,6 +1,5 @@
 package com.example.listview;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,14 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class Activity_ListView extends AppCompatActivity {
 
@@ -136,8 +133,8 @@ public class Activity_ListView extends AppCompatActivity {
 			return;
 		}
 
-		if (choice.equals("Model")) {
-			Collections.sort(data,new ComparatorModel());
+		if (choice.equals("Location")) {
+			Collections.sort(data,new ComparatorLocation());
 			return;
 		}
 
@@ -178,7 +175,7 @@ public class Activity_ListView extends AppCompatActivity {
 	 */
 	private void setupSimpleSpinner() {
 		spinner.setPrompt("Bikes");
-		String[] s = {"Company", "Model", "Price"};
+		String[] s = {"Company", "Location", "Price"};
 		adapt = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item,s);
 		adapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapt);

@@ -5,10 +5,10 @@ import java.util.Comparator;
 /**
  * Created by David & Jack on 4/7/16.
  */
-public class ComparatorModel implements Comparator<BikeData> {
+public class ComparatorLocation implements Comparator<BikeData> {
     @Override
     public int compare(BikeData lhs, BikeData rhs) {
-        return (lhs.getModel().compareTo(rhs.getModel()));
+        return (lhs.getLocation().compareTo(rhs.getLocation()));
     }
 }
 
